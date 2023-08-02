@@ -106,7 +106,7 @@ app.delete("/districts/:districtId/", async (req, res) => {
 
 //API 6 update district table
 
-app.put("districts/:districtId/", async (req, res) => {
+app.put("/districts/:districtId/", async (req, res) => {
   const { districtId } = req.params;
   const putObjDetails = req.body;
   const { districtName, stateId, cases, cured, active, deaths } = putObjDetails;
@@ -125,5 +125,24 @@ app.put("districts/:districtId/", async (req, res) => {
 });
 
 //API 7
+
+app.get("/states/:stateId/stats/", async (req, res) => {
+  const { stateId } = req.params;
+  const api7Query = `
+    SELECT sum(cases) as totalCases,sum(cured) as totalCured,sum(active) as totalActive, sum(deaths) as totalDeaths
+    FROM district WHERE state_id=${stateId};`;
+  const api7Res = await db.get(api7Query);
+  res.send(api7Res);
+});
+
+//api 8
+
+app.get("/districts/:districtId/details/", async (req, res) => {
+  const { districtId } = req.params;
+  const api8Query = `
+    select state.state_name as stateName from district natural join state where district.district_id=${districtId};`;
+  const api8Res = await db.get(api8Query);
+  res.send(api8Res);
+});
 
 module.exports = app;
