@@ -9,6 +9,7 @@ GET http://localhost:3000/states/6/
 ### api 3
 
 POST http://localhost:3000/districts/
+Content-Type: application/json
 
 {
   "districtName": "Bagalkot",
@@ -30,6 +31,16 @@ DELETE http://localhost:3000/districts/400/
 ### api 6
 
 PUT http://localhost:3000/districts/400/
+Content-Type: application/json
+
+{
+  "districtName": "Nadia",
+  "stateId": 3,
+  "cases": 9628,
+  "cured": 6524,
+  "active": 3000,
+  "deaths": 104
+}
 
 ### api 7
 

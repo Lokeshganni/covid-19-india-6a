@@ -109,6 +109,7 @@ app.delete("/districts/:districtId/", async (req, res) => {
 app.put("/districts/:districtId/", async (req, res) => {
   const { districtId } = req.params;
   const putObjDetails = req.body;
+  console.log(putObjDetails);
   const { districtName, stateId, cases, cured, active, deaths } = putObjDetails;
   const API6Query = `
   UPDATE district
